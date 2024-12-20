@@ -1,7 +1,7 @@
 # SoftUni Project Defense - 8 Aug 2022
 
 ## Used software
-* Stpring Tool Suite 4
+* Spring Tool Suite 4
 * MySQL Workbench
   
 ## Used technologies
