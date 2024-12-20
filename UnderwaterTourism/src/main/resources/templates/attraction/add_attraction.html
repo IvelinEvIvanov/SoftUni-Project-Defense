@@ -1,0 +1,136 @@
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/commons::head">
+</head>
+<body>
+	<nav th:replace="fragments/commons::navigation"></nav>
+	<div class="d-flex justify-content-center">
+		<div
+			class="card bg-light mt-4 mb-4"
+			style="width: 750px;">
+			<div class="card-header text-center">Create Attraction</div>
+			<!-- FORM -->
+			<form
+				th:object="${attraction}"
+				th:method="post"
+				th:action="@{/attractions/add}"
+				enctype="multipart/form-data">
+				<div class="row mt-2">
+					<label
+						for="title"
+						class="col-sm-2 col-form-label">Title</label>
+					<div class="col-sm-10">
+						<input
+							th:field="*{title}"
+							type="text"
+							class="form-control">
+					</div>
+				</div>
+				<div class="row mt-2">
+					<label
+						for="description"
+						class="col-sm-2 col-form-label">Description</label>
+					<div class="col-sm-10">
+						<textarea
+							th:field="*{description}"
+							rows="5"
+							cols="50"
+							class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="row mt-2">
+					<label
+						for="price"
+						class="col-sm-2 col-form-label">Price</label>
+					<div class="col-sm-10">
+						<input
+							th:field="*{price}"
+							type="number"
+							min="10.00"
+							step="1"
+							class="form-control">
+					</div>
+				</div>
+				<div class="row mt-2">
+					<label
+						for="duration"
+						class="col-sm-2 col-form-label">Duration</label>
+					<div class="col-sm-10">
+						<input
+							th:field="*{duration}"
+							type="number"
+							min="1"
+							step="1"
+							class="form-control">
+					</div>
+				</div>
+				<div class="row mt-2">
+					<label
+						for="divingSeason"
+						class="col-sm-2 col-form-label">Diving Season</label>
+					<div class="col-sm-10">
+						<input
+							th:field="*{divingSeason}"
+							type="text"
+							class="form-control">
+					</div>
+				</div>
+				<div class="row mt-2">
+					<label
+						for="difficulty"
+						class="col-sm-2 col-form-label">Difficulty</label>
+					<div class="col-sm-10">
+						<input
+							th:field="*{difficulty}"
+							type="text"
+							class="form-control">
+					</div>
+				</div>
+				<th:block th:if="${allDepartments} != null">
+					<div class="row mt-2">
+						<label
+							for="departmentID"
+							class="col-sm-2 col-form-label">Department</label>
+						<div class="col-sm-10">
+							<select
+								class="form-select"
+								id="departmentID"
+								name="departmentID">
+								<option value="">-- Select Department --</option>
+								<option
+									th:each="department : ${allDepartments}"
+									th:text="${department.name}"
+									th:value="${department.departmentID}">Department Name</option>
+							</select>
+						</div>
+					</div>
+				</th:block>
+				<div class="row mt-2">
+					<label
+						for="image"
+						class="col-sm-2 col-form-label">Image</label>
+					<div class="col-sm-10">
+						<input
+							id="imageUpload"
+							name="imageUpload"
+							type="file"
+							class="form-control"
+							required>
+					</div>
+				</div>
+				<!-- SUBMIT -->
+				<div class="row mt-4">
+					<div class="col-sm-12 text-center">
+						<input
+							class="btn btn-primary"
+							type="submit"
+							value="Confirm">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/commons::head">
+</head>
+<body>
+	<nav th:replace="fragments/commons::navigation"></nav>
+	<h3 class="mt-4 mb-4 pb-2 pb-md-0 mb-md-5 text-center">Employees</h3>
+	<div class="d-flex align-items-start mt-5">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Full Name</th>
+					<th scope="col">Birth Date</th>
+					<th scope="col">Hire Date</th>
+					<th scope="col">Job Title</th>
+					<th scope="col">Salary</th>
+					<th scope="col">User Id</th>
+					<th scope="col">Manager Id</th>
+				</tr>
+			</thead>
+			<tbody
+				th:each="employee : ${allEmployees}"
+				th:object="${employee}">
+				<tr>
+					<th
+						th:text=*{id}
+						scope="row"></th>
+					<td th:text="*{user.firstName}+' '+*{user.lastName}"></td>
+					<td th:text="*{birthDate}"></td>
+					<td th:text="*{hireDate}"></td>
+					<td th:text="*{jobTitle}"></td>
+					<td th:text="*{#numbers.formatCurrency(salary)}"></td>
+					<td th:text="*{user.id}"></td>
+					<th:block th:if="*{manager}">
+						<td th:text="*{manager.id}"></td>
+					</th:block>
+					<th:block th:unless="*{manager}">
+						<td>Null</td>
+					</th:block>
+					<td>
+						<form
+							th:action="@{/admin/employee/{id}/edit(id=*{id})}"
+							th:method="get">
+							<input
+								type="submit"
+								class="btn btn-outline-secondary py-1 px-1"
+								value="Edit" />
+						</form>
+					</td>
+					<td>
+						<form
+							th:action="@{/admin/employee-info/{id}(id=*{id})}"
+							th:method="get">
+							<input
+								type="submit"
+								class="btn btn-outline-secondary py-1 px-1"
+								value="Info" />
+						</form>
+					</td>
+					<td>
+						<form
+							th:action="@{/admin/delete/employee/{id}(id=*{id})}"
+							th:method="delete">
+							<input
+								type="submit"
+								class="btn btn-outline-secondary py-1 px-1"
+								value="Delete" />
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

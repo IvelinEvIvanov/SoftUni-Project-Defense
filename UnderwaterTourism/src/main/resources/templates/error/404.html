@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head">
+</head>
+<body>
+	<nav th:replace="fragments/commons::navigation"></nav>
+	<div
+		class="d-flex justify-content-center align-items-center"
+		style="height: 400px">
+		<div
+			class="card border-danger mb-3"
+			style="max-width: 18rem;">
+			<div class="card-header text-center">ERROR</div>
+			<div class="card-body text-danger">
+				<h5 class="card-title">Wrong URL.</h5>
+				<p class="card-text"></p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

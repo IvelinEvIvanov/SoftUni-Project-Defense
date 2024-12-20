@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/commons::head">
+</head>
+<body>
+	<nav th:replace="fragments/commons::navigation"></nav>
+	<div class="container">
+		<!-- ROW -->
+		<div class="row m-4">
+			<th:block th:each="itr : ${attractions}">
+				<div class="col">
+					<div
+						class="card"
+						style="width: 18rem;">
+						<img
+							th:src="|/images/${itr.image}|"
+							class="card-img-top"
+							alt="..."
+							style="width: 286px; height: 214.61px">
+						<div class="card-body text-center">
+							<h5
+								th:text="${itr.title}"
+								class="card-title">Attraction Title</h5>
+							<p class="card-text"></p>
+							<a
+								th:href="@{/attractions/{title}/details(title=${itr.title})}"
+								class="btn btn-primary d-inline">Details</a>
+							<form
+								sec:authorize="hasAnyAuthority('ADMIN')"
+								th:action="@{/attractions/remove/{id}(id=*{itr.id})}"
+								th:method="delete"
+								class="d-inline">
+								<input
+									type="submit"
+									class="btn btn-primary d-inline"
+									value="Delete" />
+							</form>
+						</div>
+					</div>
+				</div>
+			</th:block>
+		</div>
+	</div>
+</body>
+</html>

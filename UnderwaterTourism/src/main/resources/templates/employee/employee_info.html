@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/commons::head">
+</head>
+<body>
+	<nav th:replace="fragments/commons::navigation"></nav>
+	<div class="d-flex justify-content-center p-3">
+		<div
+			class="card"
+			style="width: 18rem;">
+			<div class="card-header text-center">Personal Info</div>
+			<ul
+				th:object="${employeeInfo}"
+				class="list-group list-group-flush">
+				<li class="list-group-item">
+					<label>User ID:</label>
+					<span
+						th:text="*{user.id}"
+						class="ps-2"></span>
+				</li>
+				<li class="list-group-item">
+					<label>Full Name:</label>
+					<span
+						th:text="|*{user.firstName} *{user.lastName}|"
+						class="ps-2"></span>
+				</li>
+				<li class="list-group-item">
+					<label>Age:</label>
+					<span
+						th:text="*{user.age}"
+						class="ps-2"></span>
+				</li>
+				<li class="list-group-item">
+					<label>Gender:</label>
+					<span
+						th:text="*{user.gender}"
+						class="ps-2"></span>
+				</li>
+				<li class="list-group-item">
+					<label>Email:</label>
+					<span
+						th:text="*{user.email}"
+						class="ps-2"></span>
+				</li>
+				<li class="list-group-item">
+					<label>Phone:</label>
+					<span
+						th:text="*{user.phone}"
+						class="ps-2"></span>
+				</li>
+				<li class="list-group-item">
+					<label>Roles:</label>
+					<span
+						th:each="userRoleEntiy : *{user.roles}"
+						th:text="[+ ${userRoleEntiy.role} +]"
+						class="ps-2"></span>
+				</li>
+				<div class="card-header text-center">Employee Info</div>
+				<li class="list-group-item">
+					<label>Employee ID:</label>
+					<span
+						th:text="*{id}"
+						class="ps-2"></span>
+				</li>
+				<li class="list-group-item">
+					<label>Manager:</label>
+					<span
+						th:if="*{manager!=null}"
+						th:text="|*{manager.user.firstName} *{manager.user.lastName}|"
+						class="ps-2"></span>
+				</li>
+				<li class="list-group-item">
+					<label>Job Title:</label>
+					<span
+						th:text="*{jobTitle}"
+						class="ps-2"></span>
+				</li>
+				<li class="list-group-item">
+					<label>Birthdate:</label>
+					<span
+						th:text="*{birthDate}"
+						class="ps-2"></span>
+				</li>
+				<li class="list-group-item">
+					<label>Hiredate:</label>
+					<span
+						th:text="*{hireDate}"
+						class="ps-2"></span>
+				</li>
+				<li class="list-group-item">
+					<label>Salary:</label>
+					<span
+						th:text="*{salary}"
+						class="ps-2"></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.my-background {
+	background-image: url('/images/home.jpg');
+	height:100vh;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+#nav-commons {
+	background-color: aqua;
+}
+
+#navbar-brand-home {
+	color: black;
+}
+
+#footer-commons {
+	background-color: aqua;
+	opacity: 0.4;
+}
+
+#nav-toggle-button {
+	background-image: url('/images/icons/card-list.svg');
+	background-size: cover;
+}
+
+.navbar-nav .nav-item .nav-link {
+	color: black;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+	background-color: gray;
+	color: white;
+}

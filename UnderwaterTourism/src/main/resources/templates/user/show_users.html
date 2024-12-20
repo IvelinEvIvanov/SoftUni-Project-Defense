@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/commons::head">
+</head>
+<body>
+	<nav th:replace="fragments/commons::navigation"></nav>
+	<h3 class="mt-4 mb-4 pb-2 pb-md-0 mb-md-5 text-center">Users</h3>
+	<div class="d-flex align-items-start mt-5">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">First</th>
+					<th scope="col">Last</th>
+					<th scope="col">Age</th>
+					<th scope="col">Gender</th>
+					<th scope="col">Email</th>
+					<th scope="col">Phone</th>
+					<th scope="col">Role</th>
+				</tr>
+			</thead>
+			<tbody
+				th:each="user : ${users}"
+				th:object="${user}">
+				<tr>
+					<th
+						th:text=*{id}
+						scope="row"></th>
+					<td th:text="*{firstName}"></td>
+					<td th:text="*{lastName}"></td>
+					<td th:text="*{age}"></td>
+					<td th:text="*{gender}"></td>
+					<td th:text="*{email}"></td>
+					<td th:text="*{phone}"></td>
+					<th:block th:each="userRoleEntity : *{roles}">
+						<td th:text="${userRoleEntity.role.name()}"></td>
+					</th:block>
+					<td>
+						<form
+							th:action="@{/admin/delete/user/{id}(id=*{id})}"
+							th:method="delete">
+							<input
+								type="submit"
+								class="btn btn-outline-secondary py-1 px-1  "
+								value="Delete" />
+						</form>
+					</td>
+					<td>
+						<form
+							th:action="@{/admin/user/{id}/add-employee(id=*{id})}"
+							th:method="get">
+							<input
+								type="submit"
+								class="btn btn-outline-secondary py-1 px-1 "
+								value="Add Employee" />
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

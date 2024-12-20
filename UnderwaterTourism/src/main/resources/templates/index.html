@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/commons::head">
+</head>
+<body class="my-background">
+	<nav th:replace="fragments/commons::navigation"></nav>
+	<div
+		class="d-flex flex-column"
+		style="min-height: 100vh;">
+		<div class="container flex-grow-1 text-light">
+			<h1 class="text-center mt-5">Wellcome</h1>
+			<h1 class="text-center mt-5">To</h1>
+			<h1 class="text-center mt-5 fw-bold fst-italic">UNDERWATER TOURISM</h1>
+			<h2
+				class="text-center mt-5"
+				sec:authorize="isAuthenticated()">, [[${#request.userPrincipal.principal.fullName}]]</h2>
+		</div>
+		<footer th:replace="fragments/commons::footer"></footer>
+	</div>
+</body>
+</html>

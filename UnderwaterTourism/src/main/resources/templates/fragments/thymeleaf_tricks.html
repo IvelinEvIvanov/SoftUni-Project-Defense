@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- Get Info From Custom UserDetails -->
+	<div sec:authorize="!isAuthenticated()">
+		<h1>Underwater Tourism!</h1>
+	</div>
+	<div sec:authorize="isAuthenticated()">
+		<h1>
+			Welcome,
+			<th:block sec:authentication="name">
+			</th:block>
+			! Roles:
+			<span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+			<br>
+			Full Name:
+			<h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">[[${#request.userPrincipal.principal.fullName}]]</h3>
+		</h1>
+	</div>
+	
+	
+	<main
+		sec:authorize="!isAuthenticated()"
+		class="d-lg-flex justify-content-center align-items-center my-background"></main>
+</body>
+</html>

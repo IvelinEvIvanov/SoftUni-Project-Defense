@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/commons::head">
+</head>
+<body>
+	<nav th:replace="fragments/commons::navigation"></nav>
+	<table class="table">
+		<h3 class="text-center m-3">Report</h3>
+		<thead>
+			<tr>
+				<th scope="col">From Date</th>
+				<th scope="col">To Date</th>
+				<th scope="col">Income</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="report : ${reports}">
+				<td th:text="${report.fromDate}">From Date</td>
+				<td th:text="${report.toDate}">To Date</td>
+				<td th:text="|${report.income}$|">Income</td>
+			</tr>
+			
+		</tbody>
+	</table>
+</body>
+</html>

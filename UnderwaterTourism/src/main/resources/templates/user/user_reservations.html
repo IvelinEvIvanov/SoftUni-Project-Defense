@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/commons::head">
+</head>
+<body>
+	<nav th:replace="fragments/commons::navigation"></nav>
+	<th:block th:if="${missingAttractions}">
+		<h1 class="text-center">You don't have reservations at this moment!</h1>
+	</th:block>
+	<div class="container">
+		<!-- ROW -->
+		<div class="row m-4">
+			<th:block th:each="itrRes : ${reservations}">
+				<div class="col">
+					<div
+						class="card"
+						style="width: 18rem;">
+						<img
+							th:src="|/images/${itrRes.image}|"
+							class="card-img-top"
+							alt="..."
+							style="width: 286px; height: 214.61px">
+						<div class="card-body text-center">
+							<h5
+								th:text="${itrRes.title}"
+								class="card-title">Attraction Title</h5>
+							<p
+								th:text="|Reservation date - ${itrRes.reservationDate}|"
+								class="card-text text-start m-0"></p>
+							<p
+								th:text="|Remaining days - ${itrRes.remainingDays}|"
+								class="card-text text-start"></p>
+							<p
+								th:text="|Visitors - ${itrRes.peopleNumber}|"
+								class="card-text text-start"></p>
+							<p
+								th:text="|Attraction hours - ${itrRes.hoursNumber}|"
+								class="card-text text-start m-0"></p>
+							<p
+								th:text="|Price per hour - ${itrRes.price}$|"
+								class="card-text text-start"></p>
+							<p
+								th:text="|Part of the day - ${itrRes.partOfDay}|"
+								class="card-text text-start"></p>
+							<p
+								th:text="|Total sum - ${itrRes.totalSumPerAttraction}$|"
+								class="card-text text-end"></p>
+						</div>
+						<form
+							sec:authorize="hasAnyAuthority('USER')"
+							th:action="@{/reservation/remove/{id}(id=*{itrRes.id})}"
+							th:method="delete"
+							class="d-inline text-center mb-2">
+							<input
+								type="submit"
+								class="btn btn-primary d-inline"
+								value="Delete" />
+						</form>
+					</div>
+				</div>
+			</th:block>
+		</div>
+		<th:block th:if="${missingAttractions == false}">
+			<div class="row">
+				<div class="col border border-info text-center">
+					<h3 th:text="|Bill for all reservations: ${allAttractionsSum}$|">Total Sum For All Attractions:</h3>
+				</div>
+			</div>
+		</th:block>
+	</div>
+</body>
+</html>

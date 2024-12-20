@@ -1,0 +1,16 @@
+.metadata
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+.settings
+.vscode/
+/target/
+
+.classpath
+.project
+mvnw
+mvnw.cmd
+
+
+
+

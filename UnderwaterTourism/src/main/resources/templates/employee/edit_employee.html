@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head">
+</head>
+<body>
+	<nav th:replace="fragments/commons::navigation"></nav>
+	<div class="card-body p-4 p-md-5">
+		<h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Edit Employee</h3>
+		<form
+			th:action="@{/admin/employee/{id}/edit(id=${employeeEditBindingModel.id})}"
+			th:method="post">
+			<input
+				type="hidden"
+				th:field="${employeeEditBindingModel.id}">
+			<div class="row">
+				<div class="col-md-6 mb-4">
+					<div class="form-outline">
+						<label
+							class="form-label"
+							for="jobTitle"
+							style="margin-left: 0px;">Job Title</label>
+						<input
+							th:field="${employeeEditBindingModel.jobTitle}"
+							th:errorclass="bg-danger"
+							type="text"
+							class="form-control form-control-lg"
+							minlength="1"
+							maxlength="20"
+							required>
+						<div
+							th:if="${#fields.hasErrors('employeeEditBindingModel.jobTitle')}"
+							th:errors="${employeeEditBindingModel.jobTitle}"
+							class="text-danger">Server-side validation.</div>
+					</div>
+				</div>
+				<div class="col-md-6 mb-4">
+					<div class="form-outline">
+						<label
+							class="form-label"
+							for="hireDate"
+							style="margin-left: 0px;">Hire Date</label>
+						<input
+							th:field="${employeeEditBindingModel.hireDate}"
+							type="date"
+							class="form-control form-control-lg"
+							required>
+						<div
+							th:if="${#fields.hasErrors('employeeEditBindingModel.hireDate')}"
+							th:errors="${employeeEditBindingModel.hireDate}"
+							class="text-danger">Server-side validation.</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 mb-4 pb-2">
+					<div class="form-outline">
+						<label
+							class="form-label"
+							for="salary"
+							style="margin-left: 0px;">Salary</label>
+						<input
+							th:field="${employeeEditBindingModel.salary}"
+							type="number"
+							step="0.01"
+							class="form-control form-control-lg"
+							required>
+						<div
+							th:if="${#fields.hasErrors('employeeEditBindingModel.salary')}"
+							th:errors="${employeeEditBindingModel.salary}"
+							class="text-danger">Server-side validation.</div>
+					</div>
+				</div>
+				<div class="col-md-6 mb-4 pb-2">
+					<div class="form-outline">
+						<label
+							class="form-label"
+							for="managers"
+							style="margin-left: 0px;">Managers</label>
+						<select
+							class="form-select"
+							th:field="${employeeEditBindingModel.managerID}">
+							<option value="">-- Select Manager --</option>
+							<option
+								th:each="manager : ${allManagers}"
+								th:text="|${manager.firstName}  ${manager.lastName}|"
+								th:value="${manager.id}"
+								th:selected="${manager.id} eq ${employeeEditBindingModel.managerID}">Manager Name</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="mt-4 pt-2 text-center">
+				<input
+					class="btn btn-primary btn-lg"
+					type="submit"
+					value="Edit">
+			</div>
+		</form>
+	</div>
+</body>
+</html>

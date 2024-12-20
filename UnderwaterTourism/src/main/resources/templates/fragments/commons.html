@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+<meta charset="utf-8">
+<meta
+	name="viewport"
+	content="width=device-width, initial-scale=1">
+<title>Underwater Tourism</title>
+<!-- CSS -->
+<link
+	rel="stylesheet"
+	type="text/css"
+	href="/css/bootstrap.min.css" />
+<link
+	rel="stylesheet"
+	type="text/css"
+	href="/css/style.css" />
+<!-- JS -->
+<script
+	type="text/javascript"
+	src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<!-- NAVIGATION -->
+	<nav
+		th:fragment="navigation"
+		id="nav-commons"
+		class="navbar navbar-expand-lg">
+		<div class="container-fluid">
+			<a
+				id="navbar-brand-home"
+				class="navbar-brand"
+				th:href="@{/}">Home</a>
+			<!-- Toggle Button -->
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-bs-toggle="collapse"
+				data-bs-target="#navbarNav"
+				aria-controls="navbarNav"
+				aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span
+					id="nav-toggle-button"
+					class="navbar-toggler-icon"></span>
+			</button>
+			<!-- Links -->
+			<div
+				class="collapse navbar-collapse"
+				id="navbarNav">
+				<ul class="navbar-nav ms-auto">
+					<!-- Underwater Tourism Navigation -->
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"
+							href="#"
+							role="button"
+							aria-expanded="false">UNDERWATER TOURISM</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a
+									class="dropdown-item fw-bolder"
+									th:href="@{/attractions/show-all}">Attractions</a>
+							</li>
+						</ul>
+					</li>
+					<!-- ADMIN Navigation-->
+					<li
+						sec:authorize="hasAnyAuthority('ADMIN')"
+						class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"
+							href="#"
+							role="button"
+							aria-expanded="false">Admin</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a
+									class="dropdown-item fw-bolder"
+									th:href="@{/admin/show-users}">Show Users</a>
+							</li>
+							<li>
+								<a
+									class="dropdown-item fw-bolder"
+									th:href="@{/admin/show-employees}">Show Employees</a>
+							</li>
+							<li>
+								<a
+									class="dropdown-item fw-bolder"
+									th:href="@{/attractions/add}">Add Attraction</a>
+							</li>
+						</ul>
+					</li>
+					<li
+						sec:authorize="hasAnyAuthority('ADMIN')"
+						class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"
+							href="#"
+							role="button"
+							aria-expanded="false">MyTests</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a
+									class="dropdown-item fw-bolder"
+									th:href="@{/rest/test}">Rest</a>
+							</li>
+							<li>
+								<a
+									class="dropdown-item fw-bolder"
+									th:href="@{/rest/shark-cage/details}">Rest JSON</a>
+							</li>
+							<li>
+								<a
+									class="dropdown-item fw-bolder"
+									th:href="@{/interceptor/test}">Interceptor</a>
+							</li>
+							<li>
+								<a
+									class="dropdown-item fw-bolder"
+									th:href="@{/report/test}">Scheduling</a>
+							</li>
+						</ul>
+					</li>
+					<!-- USERS Navigation-->
+					<li
+						sec:authorize="hasAnyAuthority('USER')"
+						class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown"
+							href="#"
+							role="button"
+							aria-expanded="false">My Profile</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a
+									class="dropdown-item fw-bolder"
+									th:href="@{/user-profile/show}">Profile Details</a>
+							</li>
+							<li>
+								<a
+									class="dropdown-item fw-bolder"
+									th:href="@{/reservation/user-reservations}">Reservations</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<!-- Authentication Navigation -->
+				<ul class="navbar-nav ms-auto">
+					<li
+						sec:authorize="!isAuthenticated()"
+						class="nav-item">
+						<a
+							class="nav-link"
+							th:href="@{/user/login}">Login</a>
+					</li>
+					<li
+						sec:authorize="!isAuthenticated()"
+						class="nav-item">
+						<a
+							class="nav-link"
+							th:href="@{/user/register}">Register</a>
+					</li>
+					<li
+						sec:authorize="isAuthenticated()"
+						class="nav-item">
+						<form
+							th:action="@{/user/logout}"
+							th:method="POST">
+							<input
+								class="btn btn-link nav-link"
+								type="submit"
+								value="Logout">
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- FOOTER -->
+	<footer
+		th:fragment="footer"
+		id="footer-commons"
+		class="">
+		<ul class="nav justify-content-center">
+			<li class="nav-item">
+				<a
+					href="/"
+					class="nav-link px-2 fw-bold">Home</a>
+			</li>
+			<li class="nav-item">
+				<a
+					href="#"
+					class="nav-link px-2 fw-bold">FAQs</a>
+			</li>
+			<li class="nav-item">
+				<a
+					href="#"
+					class="nav-link px-2 fw-bold">About</a>
+			</li>
+		</ul>
+		<p class="text-center fw-bold mb-0">&copy; 2021 Company, Inc</p>
+	</footer>
+</body>
+</html>

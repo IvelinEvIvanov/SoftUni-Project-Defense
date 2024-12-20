@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/commons::head">
+<body>
+	<nav th:replace="fragments/commons::navigation"></nav>
+	<div class="container">
+		<!-- ROW -->
+		<div class="row m-4">
+			<div class="d-flex justify-content-center">
+				<div
+					th:object="${attraction}"
+					class="card"
+					style="width: 35rem;">
+					<img
+						th:src="|/images/*{image}|"
+						class="card-img-top"
+						alt="...">
+					<div class="card-body text-center">
+						<h5
+							th:text="*{title}"
+							class="card-title">Title</h5>
+						<p
+							th:text="*{description}"
+							class="card-text">Description</p>
+						<p
+							th:text="|Diving Season - *{divingSeason}|"
+							class="card-text text-start">Diving Season</p>
+						<p
+							th:text="|Difficulty - *{difficulty}|"
+							class="card-text text-start">Difficulty</p>
+						<p
+							th:text="|Duration - *{duration}h|"
+							class="card-text text-start">Duration</p>
+						<p
+							th:text="|Price - *{price}$|"
+							class="card-text text-start">Price</p>
+						<!-- LOGGED USER -->
+						<p sec:authorize="isAuthenticated()">
+							<button
+								class="btn btn-primary"
+								type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapseExample"
+								aria-expanded="false"
+								aria-controls="collapseExample">Reservation</button>
+						<p
+							th:if="${hasErrors}"
+							class="bg-danger">Errors!Try again!</p>
+						<div
+							class="collapse"
+							id="collapseExample">
+							<div class="card card-body">
+								<!-- FORM -->
+								<form
+									th:method="post"
+									th:action="@{/reservation/{title}(title=${attraction.title})}"
+									th:object="${reservation}">
+									<div class="row g-3 align-items-center">
+										<!-- RESERVATION DATE -->
+										<div class="col-6">
+											<input
+												th:field="*{reservationDate}"
+												th:errorclass="bg-danger"
+												type="date"
+												class="form-control"
+												required>
+											<div
+												th:if="${#fields.hasErrors('reservationDate')}"
+												th:errors="*{reservationDate}"
+												class="text-danger">Server-side validation</div>
+										</div>
+										<div class="col-auto">
+											<span class="form-text"> Reservation Date </span>
+										</div>
+										<!-- NUMBER OF PEOPLE -->
+										<div class="col-6">
+											<input
+												th:field="*{peopleNumber}"
+												th:errorclass="bg-danger"
+												min="1"
+												th:value="1"
+												type="number"
+												class="form-control"
+												required>
+											<div
+												th:if="${#fields.hasErrors('peopleNumber')}"
+												th:errors="*{peopleNumber}"
+												class="text-danger">Server-side validation</div>
+										</div>
+										<div class="col-auto">
+											<span class="form-text"> Number Of People </span>
+										</div>
+										<!-- NUMBER OF HOURS -->
+										<div class="col-6">
+											<input
+												th:field="*{hoursNumber}"
+												th:errorclass="bg-danger"
+												th:value="1"
+												min="1"
+												type="number"
+												class="form-control"
+												required>
+											<div
+												th:if="${#fields.hasErrors('hoursNumber')}"
+												th:errors="*{peopleNumber}"
+												class="text-danger">Server-side validation</div>
+										</div>
+										<div class="col-auto">
+											<span class="form-text"> Number Of Hours </span>
+										</div>
+										<!-- PART OF THE DAY -->
+										<div class="col-6">
+											<select
+												th:field="*{partOfDay}"
+												th:errorclass="bg-danger"
+												class="form-select">
+												<option
+													th:each="itr : ${T(bg.softuni.ut.model.entity.enums.PartOfDayEnum).values()}"
+													th:text="${itr}"
+													th:value="${itr}">Part Of The Day</option>
+											</select>
+											<div
+												th:if="${#fields.hasErrors('partOfDay')}"
+												th:errors="*{partOfDay}"
+												class="text-danger">Server-side validation</div>
+										</div>
+										<div class="col-auto">
+											<span class="form-text"> Part Of The Day </span>
+										</div>
+										<div class="mt-4 pt-2 text-center">
+											<input
+												class="btn btn-primary"
+												type="submit"
+												value="Confirm">
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
