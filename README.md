@@ -2,10 +2,10 @@
 
 ## Used software
 * Stpring Tool Suite 4
-* Apache Maven
 * MySQL Workbench
   
 ## Used technologies
+* Apache Maven
 * Thymeleaf
 * Bootstrap
 * JavaScript
