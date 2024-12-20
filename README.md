@@ -1,10 +1,10 @@
 # SoftUni Project Defense - 8 Aug 2022
 
-## Used software
+## Used Tools
 * Spring Tool Suite 4
 * MySQL Workbench
   
-## Used technologies
+## Used Technologies
 * Apache Maven
 * Thymeleaf
 * Bootstrap
